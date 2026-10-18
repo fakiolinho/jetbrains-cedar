@@ -41,6 +41,10 @@ pick a schema for a single file, click the *Click to associate schema* code lens
 
 Install the zip through *Settings → Plugins → ⚙ → Install Plugin from Disk*.
 
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) and [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md).
+
 ## Credits
 
 Grammar and language configuration: Cedar Contributors, Apache 2.0 (see `src/main/resources/textmate/cedar/LICENSE`).
