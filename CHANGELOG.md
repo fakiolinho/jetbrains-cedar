@@ -1,3 +1,8 @@
+## 0.1.5
+
+- The repository now has a contributing guide (`CONTRIBUTING.md`) and a code of conduct (`CODE_OF_CONDUCT.md`),
+  adapted from vscode-cedar. No changes to the plugin itself.
+
 ## 0.1.4
 
 - `.cedar` and `.cedarschema` files show the Cedar icons from vscode-cedar instead of TextMate's generic icon.
