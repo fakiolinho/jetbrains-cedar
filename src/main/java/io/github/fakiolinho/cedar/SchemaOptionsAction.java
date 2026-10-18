@@ -4,7 +4,6 @@ import com.intellij.openapi.actionSystem.ActionUpdateThread;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.fileChooser.FileChooser;
 import com.intellij.openapi.fileChooser.FileChooserDescriptor;
-import com.intellij.openapi.fileChooser.FileChooserDescriptorFactory;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.redhat.devtools.lsp4ij.LanguageServerItem;
 import com.redhat.devtools.lsp4ij.commands.LSPCommand;
@@ -38,7 +37,7 @@ public class SchemaOptionsAction extends LSPCommandAction {
         if (server == null || arg == null || arg.document_uri == null) {
             return;
         }
-        FileChooserDescriptor d = FileChooserDescriptorFactory.createSingleFileDescriptor()
+        FileChooserDescriptor d = new FileChooserDescriptor(true, false, false, false, false, false)
                 .withTitle("Cedar Schema")
                 .withFileFilter(f -> f.getName().endsWith(".cedarschema") || f.getName().endsWith(".cedarschema.json"));
         VirtualFile chosen = FileChooser.chooseFile(d, e.getProject(), null);
