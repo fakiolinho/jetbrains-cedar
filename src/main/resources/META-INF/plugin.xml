@@ -20,6 +20,7 @@
 
     <extensions defaultExtensionNs="com.intellij">
         <textmate.bundleProvider implementation="io.github.fakiolinho.cedar.CedarTextMateBundleProvider"/>
+        <notificationGroup id="Cedar" displayType="BALLOON"/>
     </extensions>
 
     <extensions defaultExtensionNs="com.redhat.devtools.lsp4ij">

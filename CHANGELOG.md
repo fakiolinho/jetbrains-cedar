@@ -1,3 +1,8 @@
+## 0.1.1
+
+- A missing `cargo` or a failed server install now shows one notification instead of flooding the IDE error
+  log with LSP4IJ exceptions from every editor feature.
+
 ## 0.1.0
 
 - Syntax highlighting for `.cedar` and `.cedarschema` (grammar from cedar-policy/vscode-cedar).
