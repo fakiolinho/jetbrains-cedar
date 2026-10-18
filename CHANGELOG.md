@@ -1,3 +1,10 @@
+## 0.1.2
+
+- The IDE now asks for a restart after installing or updating the plugin. Loading it without one left `.cedar`
+  files without syntax highlighting.
+- "What's New" is rendered as HTML instead of raw Markdown, and each version links to its GitHub release.
+- The plugin description links to the source, issues, releases, license and author.
+
 ## 0.1.1
 
 - A missing `cargo` or a failed server install now shows one notification instead of flooding the IDE error

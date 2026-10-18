@@ -39,7 +39,7 @@ The only real logic is schema association, which the server leaves to the client
 ## Releasing
 
 1. Bump `pluginVersion` in `gradle.properties` and add a `## <version>` section to `CHANGELOG.md` (it becomes both the
-   IDE change notes and the GitHub release notes).
+   IDE change notes, converted to HTML at build time, and the GitHub release notes).
 2. `git tag v<version> && git push origin main v<version>`. The tag must match `pluginVersion` or the job fails.
 3. CI signs the plugin and attaches `jetbrains-cedar-<version>.zip` to a GitHub release. It publishes to the
    Marketplace only when the repo variable `MARKETPLACE_PUBLISH` is `true` (set after the first, manual, upload).

@@ -1,4 +1,4 @@
-<idea-plugin>
+<idea-plugin require-restart="true" url="https://github.com/fakiolinho/jetbrains-cedar">
     <id>io.github.fakiolinho.cedar</id>
     <name>Cedar Policy Language</name>
     <vendor url="https://github.com/fakiolinho">Marios Fakiolas</vendor>
@@ -12,6 +12,11 @@
         through <a href="https://github.com/redhat-developer/lsp4ij">LSP4IJ</a>.</p>
         <p>Policies are validated against the nearest <code>*.cedarschema</code> up the directory tree, or one you pick
         from the code lens at the top of the file.</p>
+        <p><a href="https://github.com/fakiolinho/jetbrains-cedar">Source</a> |
+        <a href="https://github.com/fakiolinho/jetbrains-cedar/issues">Issues</a> |
+        <a href="https://github.com/fakiolinho/jetbrains-cedar/releases">Releases</a> |
+        <a href="https://github.com/fakiolinho/jetbrains-cedar/blob/main/LICENSE">Apache-2.0 License</a> |
+        by <a href="https://github.com/fakiolinho">Marios Fakiolas</a></p>
     ]]></description>
 
     <depends>com.intellij.modules.platform</depends>
