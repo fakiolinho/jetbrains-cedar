@@ -1,0 +1,58 @@
+name: build
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        # 17 is the bytecode floor in build.gradle.kts; 25 is what current JetBrains IDEs bundle.
+        java: [17, 25]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with: { distribution: temurin, java-version: '${{ matrix.java }}' }
+      - uses: gradle/actions/setup-gradle@v4
+      - run: ./gradlew test buildPlugin
+      - uses: actions/upload-artifact@v4
+        if: matrix.java == 25
+        with: { name: plugin, path: build/distributions/*.zip }
+
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with: { distribution: temurin, java-version: 25 }
+      - uses: gradle/actions/setup-gradle@v4
+      - run: ./gradlew verifyPlugin
+
+  publish:
+    # Push a tag like v0.1.0 to sign and publish to the JetBrains Marketplace.
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: [build, verify]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # create the GitHub release
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with: { distribution: temurin, java-version: 25 }
+      - uses: gradle/actions/setup-gradle@v4
+      - name: Check tag matches pluginVersion
+        run: |
+          version=$(grep '^pluginVersion=' gradle.properties | cut -d= -f2)
+          [ "v$version" = "$GITHUB_REF_NAME" ] || { echo "Tag $GITHUB_REF_NAME != pluginVersion $version"; exit 1; }
+      - run: ./gradlew publishPlugin
+        env:
+          CERTIFICATE_CHAIN: ${{ secrets.CERTIFICATE_CHAIN }}
+          PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
+          PRIVATE_KEY_PASSWORD: ${{ secrets.PRIVATE_KEY_PASSWORD }}
+          PUBLISH_TOKEN: ${{ secrets.PUBLISH_TOKEN }}
+      - uses: softprops/action-gh-release@v2
+        with: { files: build/distributions/*.zip }

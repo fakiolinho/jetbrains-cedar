@@ -1,0 +1,36 @@
+{
+  "name": "cedar",
+  "displayName": "Cedar",
+  "version": "0.0.0",
+  "license": "Apache-2.0",
+  "description": "Cedar policy language grammar, from github.com/cedar-policy/vscode-cedar",
+  "contributes": {
+    "languages": [
+      {
+        "id": "cedar",
+        "aliases": ["Cedar", "cedar"],
+        "extensions": [".cedar"],
+        "configuration": "./language-configuration.json"
+      },
+      {
+        "id": "cedarschema",
+        "aliases": ["Cedar Schema", "cedar schema"],
+        "extensions": [".cedarschema"],
+        "filenames": ["cedarschema"],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "cedar",
+        "scopeName": "source.cedar",
+        "path": "./syntaxes/cedar.tmLanguage.json"
+      },
+      {
+        "language": "cedarschema",
+        "scopeName": "source.cedarschema",
+        "path": "./syntaxes/cedarschema.tmLanguage.json"
+      }
+    ]
+  }
+}

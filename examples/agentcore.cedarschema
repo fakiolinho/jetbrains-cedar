@@ -1,0 +1,48 @@
+// Cedar schema for AgentCore Gateway policies, used only for IDE validation and completion.
+// AWS validates against its own generated schema server side; keep this one in sync with the
+// gateway's tools/list. Shape follows docs.aws.amazon.com/bedrock-agentcore/.../policy-schema-constraints.html
+// and the cedar-policy-mcp-schema-generator output.
+namespace AgentCore {
+  // IAM authorizer: id is the caller ARN (assumed-role ARN for STS callers). No tags.
+  entity IamEntity = {
+    id: String
+  };
+
+  // OAuth authorizer: id is the JWT sub. JWT claims arrive as tags, not attributes.
+  entity OAuthUser = {
+    id: String
+  } tags String;
+
+  entity Gateway;
+
+  // Every tool action sits under CallTool -> Mcp, so `action in Action::"CallTool"` covers all tools.
+  action "Mcp";
+  action "CallTool" in [Action::"Mcp"];
+
+  // ponytail: input records below are hand typed from the Duffel target's tool manifest and left
+  // optional/loose. Regenerate from the gateway's tools/list with cedar-policy-mcp-schema-generator
+  // once the target changes; see README-cedar-ide.md.
+  type Duffel___get_orderInput = {
+    order_id: String
+  };
+
+  type Duffel___change_optionsInput = {
+    order_id: String,
+    slices?: Set<{
+      slice_id: String,
+      departure_date: String
+    }>
+  };
+
+  action "Duffel___get_order" in [Action::"CallTool"] appliesTo {
+    principal: [IamEntity, OAuthUser],
+    resource: [Gateway],
+    context: { input: Duffel___get_orderInput }
+  };
+
+  action "Duffel___change_options" in [Action::"CallTool"] appliesTo {
+    principal: [IamEntity, OAuthUser],
+    resource: [Gateway],
+    context: { input: Duffel___change_optionsInput }
+  };
+}

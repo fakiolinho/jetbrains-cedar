@@ -1,0 +1,40 @@
+<idea-plugin>
+    <id>io.github.fakiolinho.cedar</id>
+    <name>Cedar Policy Language</name>
+    <vendor url="https://github.com/fakiolinho">Marios Fakiolas</vendor>
+
+    <description><![CDATA[
+        <p>Cedar policy language support for JetBrains IDEs: syntax highlighting, validation, schema driven
+        completion, hover, go to definition, rename and formatting for <code>.cedar</code>,
+        <code>.cedarschema</code> and <code>.cedarentities.json</code> files.</p>
+        <p>Highlighting uses the grammar from <a href="https://github.com/cedar-policy/vscode-cedar">vscode-cedar</a>.
+        Everything else comes from the official <code>cedar-language-server</code> (installed with cargo on first use)
+        through <a href="https://github.com/redhat-developer/lsp4ij">LSP4IJ</a>.</p>
+        <p>Policies are validated against the nearest <code>*.cedarschema</code> up the directory tree, or one you pick
+        from the code lens at the top of the file.</p>
+    ]]></description>
+
+    <depends>com.intellij.modules.platform</depends>
+    <depends>org.jetbrains.plugins.textmate</depends>
+    <depends>com.redhat.devtools.lsp4ij</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <textmate.bundleProvider implementation="io.github.fakiolinho.cedar.CedarTextMateBundleProvider"/>
+    </extensions>
+
+    <extensions defaultExtensionNs="com.redhat.devtools.lsp4ij">
+        <server id="cedar"
+                name="Cedar Language Server"
+                factoryClass="io.github.fakiolinho.cedar.CedarLanguageServerFactory">
+            <description><![CDATA[Official cedar-language-server from github.com/cedar-policy/cedar.]]></description>
+        </server>
+        <fileNamePatternMapping patterns="*.cedar;*.cedarschema;cedarschema;*.cedarschema.json;*.cedarentities.json"
+                                serverId="cedar"
+                                languageId="cedar"/>
+    </extensions>
+
+    <actions>
+        <!-- id must equal the LSP command name the server's code lens sends -->
+        <action id="cedar.schemaOptions" class="io.github.fakiolinho.cedar.SchemaOptionsAction" text="Associate Cedar Schema"/>
+    </actions>
+</idea-plugin>
