@@ -4,11 +4,13 @@ import com.intellij.openapi.actionSystem.ActionUpdateThread;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.fileChooser.FileChooser;
 import com.intellij.openapi.fileChooser.FileChooserDescriptor;
+import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.redhat.devtools.lsp4ij.LanguageServerItem;
 import com.redhat.devtools.lsp4ij.commands.LSPCommand;
 import com.redhat.devtools.lsp4ij.commands.LSPCommandAction;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /** Backs the server's "Click to associate schema" code lens ({@code cedar.schemaOptions}), which in
  *  VS Code is implemented by the extension, not the server. Opens a chooser and sends
@@ -37,12 +39,16 @@ public class SchemaOptionsAction extends LSPCommandAction {
         if (server == null || arg == null || arg.document_uri == null) {
             return;
         }
-        FileChooserDescriptor d = new FileChooserDescriptor(true, false, false, false, false, false)
-                .withTitle("Cedar Schema")
-                .withFileFilter(f -> f.getName().endsWith(".cedarschema") || f.getName().endsWith(".cedarschema.json"));
-        VirtualFile chosen = FileChooser.chooseFile(d, e.getProject(), null);
+        VirtualFile chosen = chooseSchema(e.getProject());
         if (chosen != null) {
             CedarConnectionProvider.associate(server.getServer(), arg.document_uri, chosen.toNioPath());
         }
+    }
+
+    static @Nullable VirtualFile chooseSchema(@Nullable Project project) {
+        FileChooserDescriptor d = new FileChooserDescriptor(true, false, false, false, false, false)
+                .withTitle("Cedar Schema")
+                .withFileFilter(f -> f.getName().endsWith(".cedarschema") || f.getName().endsWith(".cedarschema.json"));
+        return FileChooser.chooseFile(d, project, null);
     }
 }

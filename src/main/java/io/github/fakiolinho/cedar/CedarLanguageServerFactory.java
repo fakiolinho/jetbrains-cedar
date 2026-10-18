@@ -10,7 +10,7 @@ public class CedarLanguageServerFactory implements LanguageServerFactory {
 
     @Override
     public @NotNull StreamConnectionProvider createConnectionProvider(@NotNull Project project) {
-        return new CedarConnectionProvider();
+        return new CedarConnectionProvider(project);
     }
 
     @Override

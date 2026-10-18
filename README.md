@@ -25,7 +25,9 @@ Policies (`*.cedar`) and entities (`*.cedarentities.json`) are validated against
 diagnostics, formatting and keyword completion; with one you get entity types, actions, attributes and
 `context.input.*` per action.
 
-To pick a schema by hand, click the *Click to associate schema* code lens at the top of the file.
+If no schema is found, a notification says so once per project. Its *Choose schema…* action picks a schema for that
+file and for later files in the project that have none nearby; *Don't show again* silences it for the project. To
+pick a schema for a single file, click the *Click to associate schema* code lens at the top of the file.
 
 `examples/` has an AgentCore Gateway schema and a policy that validates against it.
 

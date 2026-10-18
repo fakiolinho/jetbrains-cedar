@@ -1,3 +1,10 @@
+## 0.1.3
+
+- When a policy has no `*.cedarschema` nearby, a notification explains that only syntax is checked and where to put
+  a schema. "Choose schema…" picks one for that file and for later files in the project that have none nearby.
+- `.cedar` and `.cedarschema` are declared as file extensions of the plugin, so the IDE can suggest it when someone
+  opens a Cedar file without it installed (once the plugin is on the Marketplace).
+
 ## 0.1.2
 
 - The IDE now asks for a restart after installing or updating the plugin. Loading it without one left `.cedar`
