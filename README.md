@@ -12,6 +12,8 @@ rather than the server: deciding which schema a policy is validated against.
 ## Install
 
 1. Marketplace: *Settings → Plugins → Marketplace → "Cedar Policy Language"*. LSP4IJ is pulled in as a dependency.
+   Or download `jetbrains-cedar-<version>.zip` from [Releases](https://github.com/fakiolinho/jetbrains-cedar/releases)
+   and use *Settings → Plugins → ⚙ → Install Plugin from Disk…* (install [LSP4IJ](https://plugins.jetbrains.com/plugin/23257-lsp4ij) first).
 2. A Rust toolchain ([rustup.rs](https://rustup.rs)). On first open of a `.cedar` file the plugin offers to run
    `cargo install --git https://github.com/cedar-policy/cedar cedar-language-server --locked`. Upstream ships no
    prebuilt binaries yet. If you already have the server on `PATH` or in `~/.cargo/bin`, it is used as is.
