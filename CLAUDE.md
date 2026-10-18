@@ -27,6 +27,8 @@ The only real logic is schema association, which the server leaves to the client
   notification. Server cwd is a temp dir because it writes `./logs/`.
 - `plugin.xml` adds the Cedar extensions to TextMate's `textmate` file type instead of declaring a file type of its
   own (that would replace TextMate highlighting). `CedarFileTypeTest` (a platform test) guards it.
+- `CedarIconProvider`: gives `.cedar`/`.cedarschema` files vscode-cedar's icons (vendored in `resources/icons/`)
+  instead of TextMate's.
 - `SchemaFinder`: pure logic for "nearest `*.cedarschema` up the tree, never above the project root". Unit tested.
 - `SchemaOptionsAction`: backs the server's "Click to associate schema" code lens. Its action id in `plugin.xml` must
   equal the LSP command name (`cedar.schemaOptions`).

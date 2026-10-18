@@ -27,6 +27,7 @@
         <!-- Puts the extensions on TextMate's own file type: highlighting is unchanged, and the Marketplace sees a
              plugin declaring .cedar, which is what the IDE's "plugins supporting this file" suggestion looks up. -->
         <fileType name="textmate" extensions="cedar;cedarschema" fileNames="cedarschema"/>
+        <fileIconProvider implementation="io.github.fakiolinho.cedar.CedarIconProvider"/>
         <textmate.bundleProvider implementation="io.github.fakiolinho.cedar.CedarTextMateBundleProvider"/>
         <notificationGroup id="Cedar" displayType="BALLOON"/>
     </extensions>

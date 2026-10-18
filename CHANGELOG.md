@@ -1,3 +1,7 @@
+## 0.1.4
+
+- `.cedar` and `.cedarschema` files show the Cedar icons from vscode-cedar instead of TextMate's generic icon.
+
 ## 0.1.3
 
 - When a policy has no `*.cedarschema` nearby, a notification explains that only syntax is checked and where to put
